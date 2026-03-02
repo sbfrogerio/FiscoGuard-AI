@@ -53,13 +53,16 @@
 
     // --- Mobile Menu Toggle ---
     function initMobileMenu() {
-        const toggle = document.getElementById('menu-toggle');
-        const links = document.getElementById('nav-links');
+        const toggle = document.getElementById('menuBtn');
+        const links = document.getElementById('menu');
         if (!toggle || !links) return;
 
         toggle.addEventListener('click', () => {
             toggle.classList.toggle('active');
             links.classList.toggle('open');
+
+            const isExpanded = toggle.classList.contains('active');
+            toggle.setAttribute('aria-expanded', isExpanded);
         });
 
         // Close on link click
@@ -103,8 +106,8 @@
 
     // --- Active Nav Link Highlight ---
     function initActiveNavLink() {
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.navbar-links a[href^="#"]');
+        const sections = document.querySelectorAll('section[id], header[id]');
+        const navLinks = document.querySelectorAll('.menu a[href^="#"]');
 
         if (!sections.length || !navLinks.length) return;
 
@@ -154,7 +157,7 @@
 
     // --- Form Submit Handler ---
     function initFormHandler() {
-        const form = document.getElementById('lead-form');
+        const form = document.getElementById('leadForm');
         if (!form) return;
 
         form.addEventListener('submit', (e) => {
